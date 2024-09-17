@@ -14,13 +14,21 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 from women.views import *
+from coolsite import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('women.urls')),
 ]
+
+# В режиме отладки(когда DEBUG=True) мы к существующим маршрутам добавляем ещё этот для статических файлов(графических).
+# На реальных серверах это делать не нужно
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
 
 handler404 = pageNotFound

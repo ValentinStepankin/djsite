@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -23,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-wb&!&vgs#-sf1tf72@4@kj501!y)02ygzsi9z(%t@(7&ogwl@b'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1']
 
@@ -122,3 +123,12 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# MEDIA_ROOT: Определяет путь на сервере, где будут храниться загруженные пользователями медиафайлы.
+# В данном случае, медиафайлы будут храниться в папке media, расположенной в корне проекта, который определяется переменной BASE_DIR.
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# MEDIA_URL: Определяет URL, по которому можно получить доступ к загруженным медиафайлам. В данном случае, для доступа к медиафайлам используется префикс /media/.
+# Когда пользователь загружает файл, этот файл будет доступен по URL, начинающемуся с /media/.
+# Например, если файл сохранен как media/image.png, он будет доступен по URL /media/image.png.
+MEDIA_URL = '/media/'
